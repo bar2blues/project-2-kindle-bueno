@@ -7,7 +7,7 @@ class Kindle {
     this._last = null;
     this._library = [];
   }
-
+//ñññ
   _exists(eBook) {
     return this._library.some(kindleBook => EBook.isEqual(kindleBook, eBook));
   }
