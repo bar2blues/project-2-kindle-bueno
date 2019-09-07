@@ -1,4 +1,4 @@
-class kindle {
+class Kindle {
   constructor() {
     this.readBooks = 0;
     this.notReadYetBooks = 0;
@@ -6,6 +6,10 @@ class kindle {
     this._next = null;
     this._last = null;
     this._library = [];
+  }
+
+  _exists(eBook) {
+    return this._library.some(kindleBook => EBook.isEqual(kindleBook, eBook));
   }
 }
 
