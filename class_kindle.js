@@ -1,4 +1,6 @@
-class Kindle {
+import EBook from "./class_EBook.js";
+
+export default class Kindle {
   constructor() {
     this.readBooks = 0;
     this.notReadYetBooks = 0;
@@ -34,5 +36,3 @@ class Kindle {
     return this._library.length;
   }
 }
-
-export default Kindle;

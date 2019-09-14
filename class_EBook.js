@@ -1,4 +1,4 @@
-class EBook {
+export default class EBook {
   constructor(title, genre, author, cover, read, readDate) {
     this.title = title;
     this.genre = genre;
@@ -19,5 +19,3 @@ class EBook {
     return this.read;
   }
 }
-
-export default EBook;
