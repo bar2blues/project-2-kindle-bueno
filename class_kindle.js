@@ -29,6 +29,10 @@ class Kindle {
   get library() {
     return this._library.map(ebook => this._copyEbook(ebook));
   }
+
+  get size() {
+    return this._library.length;
+  }
 }
 
 export default Kindle;
