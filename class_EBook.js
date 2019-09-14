@@ -19,3 +19,5 @@ class EBook {
     return this.read;
   }
 }
+
+export default EBook;
