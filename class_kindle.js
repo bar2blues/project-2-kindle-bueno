@@ -7,7 +7,7 @@ class Kindle {
     this._last = null;
     this._library = [];
   }
-  //ñññ
+  
   _exists(eBook) {
     return this._library.some(kindleBook => EBook.isEqual(kindleBook, eBook));
   }
@@ -24,5 +24,9 @@ class Kindle {
     this._library.push(eBook);
 
     this._updateNotReadYetBooks();
+  }
+  
+  get library (){
+    return this._library.map(ebook => this._copyEbook(ebook));
   }
 }
