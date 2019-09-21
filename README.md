@@ -1,6 +1,6 @@
 # Project 2: Kindle Bueno
 
-Este es el proyecto 2, para aplicar lo aprendido hasta el momento de POO en JS, Git y Metodologías ágiles 
+Este es el proyecto 2, para aplicar lo aprendido hasta el momento de POO en JS, Git y Metodologías ágiles
 
 1. Crear una clase `Kindle`, _que tendrá una única instancia_
 2. Crear una clase `Ebook`
@@ -8,14 +8,16 @@ Este es el proyecto 2, para aplicar lo aprendido hasta el momento de POO en JS, 
 ## Propiedades
 
 - El **Kindle** debe tener las siguientes propiedades:
+
   - `readBooks`: número de libros marcados como ya leídos
   - `notReadYetBooks`: número de libros marcados como no leídos aún
   - `_current` **(_propiedad privada_)**: referencia al libro que estamos leyendo actualmente
   - `_next` **(_propiedad privada_)**: referencia al próximo libro a leer
   - `_last` **(_propiedad privada_)**: referencia al último libro leído
   - `_library` **(_propiedad privada_)**: un _array_ de todos los libros que tenemos en el objeto _kindle_ (objetos de tipo _EBook_)
-  
+
 - Cada **Ebook** debe tener las siguientes propiedades:
+
   - `title`
   - `genre`
   - `author`
@@ -23,59 +25,52 @@ Este es el proyecto 2, para aplicar lo aprendido hasta el momento de POO en JS, 
   - `read`: _booleano_ que indica si fue leído
   - `readDate`: fecha en que se leyó (objeto de tipo `Date()`, por default vacío)
 
+- **Nota:** el constructor de `EBook` recibe un _objeto_ (no valores sueltos) de la forma `{ title: <TITLE>, genre: <GENRE>, author: <AUTHOR>, cover: <COVER> }` (ver [eBooks de ejemplo](https://github.com/undefinedschool/project-2-kindle-bueno#ebooks-de-ejemplo))
+
 ## Métodos
 
 - **EBook** debe tener el siguiente método:
+
   - `.isEqual(eBookA, eBookB)`: método _estático_ de _EBook_ que compara si 2 _eBooks_ son iguales (**Nota:** 2 libros son iguales si tienen el mismo título, género y autor)
 
 - **Kindle** debe tener los siguientes métodos:
+
   - `.add(eBook)`
+
     - agrega un nuevo libro a la `_library` del _Kindle_
     - el método recibe un objeto `eBook` de la forma `{ title: <TITLE>, genre: <GENRE>, author: <AUTHOR>, cover: <COVER> }` y setea las propiedades correspondientes
     - actualizar la cantidad de libros no leídos
-    - si ya existe un libro en el _Kindle_ con las mismas propiedades, no debe agregarse y debe mostrarse el siguiente mensaje (warning) por consola _`"${eBook.title}" already exists in library`_
-  
+    - si ya existe un libro en el _Kindle_ con las mismas propiedades, no debe agregarse y debe mostrarse el siguiente mensaje (warning) por consola _`"<NOMBRE_DEL_LIBRO>" already exists in library`_
+
   - `.finishCurrentBook()`
+
     - Si no tenemos libro actual, no modificar nada y mostrar el siguiente error por consola _'There is no current book to finish, you must add one first.'_
-	  - Marcar el libro actual como leído
-		- Setearle la fecha de lectura (`Date.now()`)
-		- Setear como último libro leído (`_last`) el recién finalizado (`_current`)
-		- Setear como libro actual (`_current`) al próximo a leer (`_next`)
-		- Setear como próximo libro (`_next`) al primero de los no leídos que no sea el libro actual
+    - Marcar el libro actual como leído
+    - Setearle la fecha de lectura (`Date.now()`)
+    - Setear como último libro leído (`_last`) el recién finalizado (`_current`)
+    - Setear como libro actual (`_current`) al próximo a leer (`_next`)
+    - Setear como próximo libro (`_next`) al primero de los no leídos que no sea el libro actual
     - Actualizar la cantidad de libros leídos
     - Actualizar la cantidad de libros no leídos
-  
-  - `.library` **(_getter_)**: retorna un _objeto_ que contiene los libros del kindle (no el _array_ directamente). Ver ejemplo debajo
 
-```js
-// kindle.library (getter)
-{
-  { 
-    title: 'Drive', 
-    genre: 'Psychology', 
-    author: 'Daniel H. Pink', 
-    cover: 'https://i.imgur.com/B3XpOxl.jpg'
-  }, 
-  { 
-    title: 'Futuro Pop', 
-    genre: 'Science Fiction', 
-    author: 'Luciano Banchero', 
-    cover: 'https://i.imgur.com/uYOy55M.jpg'
-  }
-}
-```
+  - `.library` **(_getter_)**: retorna un array que contiene los libros del kindle, de la forma `{ title: <TITLE>, genre: <GENRE>, author: <AUTHOR>, cover: <COVER> }`
 
   - `.size` **(_getter_)**: retorna la cantidad de libros disponibles en el _Kindle_
-  
+
   - `.currentEBook` **(_getter_)**: retorna un objeto de la forma `{ title: <TITLE>, genre: <GENRE>, author: <AUTHOR>, cover: <COVER> }` con la info del libro actual
-  
-  - `.currentEBook(eBook)` **(_setter_)**: setea cualquier libro disponible en el _Kindle_ como el actual (`_current`) y el libro actual (`_current`) pasa a ser el próximo (`_next`). En el caso de que elijamos el mismo libro que ya estamos leyendo, no hacer nada
-    
-  - `.filterBy(criteria)`: retorna un _array_ de los eBooks ya leídos o no leídos aún, según si se recibe el _string_ `'read'` o `'unread'` como parámetro
-  
-  - `.search(keywords)`: retorna un _array_ de los eBooks que incluyan las _keywords_ en `title` o `author`, sin importar si están en mayúscula o minúscula (no es _case sensitive_)
-  
-  - `sortBy(criteria)`: retorna un _array_ de los _eBooks_ ordenado (de forma ascendente) por `title` o `author`, según si se recibe el _string_ `'title'` o `'author'` como parámetro
+
+  - `.currentEBook(eBook)` **(_setter_)**: setea cualquier libro disponible en el _Kindle_ como el actual (`_current`) y el libro actual (`_current`) pasa a ser el próximo (`_next`). En el caso de que elijamos el mismo libro que ya estamos leyendo, no hacer nada. En el caso de que se intente setear un libro que no se encuentre en el _Kindle_, mostrar el mensaje de error _'The eBook must belong to the library. Add it first'_
+
+  - `.filterBy(criteria)`: retorna un _array_ de los _eBooks_ (de la forma `{ title: <TITLE>, genre: <GENRE>, author: <AUTHOR>, cover: <COVER> }`) ya leídos o no leídos aún, según si se recibe el _string_ `'read'` o `'unread'` como parámetro. En el caso de que no haya resultados, se debe mostrar el siguiente mensaje en consola: 'You have no items that match the selected filters'
+
+  - `.search(keywords)`: retorna un _array_ de los _eBooks_ (de la forma `{ title: <TITLE>, genre: <GENRE>, author: <AUTHOR>, cover: <COVER> }`) que incluyan las _keywords_ en `title` o `author` (el parámetro _keywords_ es un `string`), sin importar si están en mayúscula o minúscula (no es _case sensitive_). En el caso de que no haya resultados, se debe mostrar el siguiente mensaje en consola: 'There are no results found in your library'. **Nota:** los espacios al principio y al final de _keywords_ deben ignorarse
+
+  - `.sortBy(criteria)`: retorna un _array_ de los _eBooks_ (de la forma `{ title: <TITLE>, genre: <GENRE>, author: <AUTHOR>, cover: <COVER> }`) ordenado (de forma ascendente) por `title` o `author`, según si se recibe el _string_ `'title'` o `'author'` como parámetro
+
+  - **Nuevos métodos de _Kindle_ (29/08):**
+
+    - `.recentSearches`: muestra las últimas 5 búsquedas realizadas usando `.search` (**Nota:** sólo guarda las últimas 5)
+    - `.clearHistory`: limpia las búsquedas recientes
 
 ## Observaciones
 
@@ -91,55 +86,55 @@ Este es el proyecto 2, para aplicar lo aprendido hasta el momento de POO en JS, 
 ## eBooks de ejemplo
 
 ```js
-{ 
-  title: 'Drive', 
-  genre: 'Psychology', 
-  author: 'Daniel H. Pink', 
+{
+  title: 'Drive',
+  genre: 'Psychology',
+  author: 'Daniel H. Pink',
   cover: 'https://i.imgur.com/B3XpOxl.jpg'
 }
 ```
 
 ```js
-{ 
-  title: 'Futuro Pop', 
-  genre: 'Science Fiction', 
-  author: 'Luciano Banchero', 
+{
+  title: 'Futuro Pop',
+  genre: 'Science Fiction',
+  author: 'Luciano Banchero',
   cover: 'https://i.imgur.com/uYOy55M.jpg'
 }
 ```
 
 ```js
-{ 
-  title: 'The Lord of the Rings - The Fellowship of the Ring', 
-  genre: 'Fantasy', 
-  author: 'J. R. R. Tolkien', 
+{
+  title: 'The Lord of the Rings - The Fellowship of the Ring',
+  genre: 'Fantasy',
+  author: 'J. R. R. Tolkien',
   cover: 'https://i.imgur.com/OwMUnQu.jpg'
 }
 ```
 
 ```js
-{ 
-  title: 'The Principles Of Object-oriented Javascript', 
-  genre: 'Programming', 
-  author: 'Nicholas C. Zakas', 
+{
+  title: 'The Principles Of Object-oriented Javascript',
+  genre: 'Programming',
+  author: 'Nicholas C. Zakas',
   cover: 'https://i.imgur.com/Iktw1ps.jpg'
 }
 ```
 
 ```js
-{ 
-  title: "Harry Potter and the Philosopher's Stone", 
-  genre: 'Fantasy', 
-  author: 'J. K. Rowling', 
+{
+  title: "Harry Potter and the Philosopher's Stone",
+  genre: 'Fantasy',
+  author: 'J. K. Rowling',
   cover: 'https://i.imgur.com/PH1aXaP.jpg'
 }
 ```
 
 ```js
-{ 
-  title: 'Eloquent JavaScript', 
-  genre: 'Programming', 
-  author: 'Marijn Haverbeke', 
+{
+  title: 'Eloquent JavaScript',
+  genre: 'Programming',
+  author: 'Marijn Haverbeke',
   cover: 'https://i.imgur.com/F4NQlvx.jpg'
 }
 ```
