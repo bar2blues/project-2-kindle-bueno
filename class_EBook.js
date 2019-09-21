@@ -14,8 +14,4 @@ export default class EBook {
       eBookA.genre === eBookB.genre
     );
   }
-
-  get read() {
-    return this.read;
-  }
 }
