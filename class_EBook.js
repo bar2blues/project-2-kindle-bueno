@@ -1,5 +1,5 @@
 export default class EBook {
-  constructor(title, genre, author, cover, read, readDate) {
+  constructor(title, genre, author, cover) {
     this.title = title;
     this.genre = genre;
     this.author = author;
