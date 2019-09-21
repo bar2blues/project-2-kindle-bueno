@@ -24,6 +24,8 @@ export default class Kindle {
     }
 
     this._library.push(eBook);
+
+    this.notReadYetBooks++;
   }
 
   get library() {
