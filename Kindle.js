@@ -57,4 +57,27 @@ export default class Kindle {
       ebook => !ebook._read && !Ebook.isEqual(ebook, this._current)
     );
   }
+
+  get _currentEbook() {
+    if (!this._current) {
+      console.error(
+        "There is no current book to finish, you must add one first."
+      );
+      return;
+    }
+    const { title, genre, author, cover } = this._current;
+    return { title, genre, author, cover };
+  }
+
+  set _currentEbook(ebook) {
+    if (!this._exists) {
+      console.error(
+        "Current Ebook could not be set, it is not in the library."
+      );
+      return;
+    } else if (!Ebook.isEqual(ebook, this._current) || !this._current) {
+      this._next = this._current;
+      this._current = ebook;
+    }
+  }
 }
