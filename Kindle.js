@@ -33,4 +33,26 @@ export default class Kindle {
   get size() {
     return this._library.length;
   }
+
+  finishCurrentBook() {
+    if (!this._current) {
+      console.error(
+        "There is no current book to finish, you must add one first."
+      );
+      return;
+    }
+    this._current.read = true;
+    this._readDate = Date.now();
+    this.last = this._current;
+    this._next = this._nextEbook();
+    this._current = this._next;
+    this.notReadYetBooks--;
+    this.readBooks++;
+  }
+
+  _nextEbook() {
+    return this._library.find(
+      ebook => !ebook._read && !Ebook.isEqual(ebook, this._current)
+    );
+  }
 }
