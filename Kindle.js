@@ -1,4 +1,4 @@
-import EBook from "./class_EBook.js";
+import EBook from "./EBook.js";
 
 export default class Kindle {
   constructor() {

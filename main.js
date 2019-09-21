@@ -1,5 +1,5 @@
-import Kindle from "./class_kindle.js";
-import EBook from "./class_EBook.js";
+import Kindle from "./Kindle.js";
+import EBook from "./EBook.js";
 
 const kindle = new Kindle();
 
